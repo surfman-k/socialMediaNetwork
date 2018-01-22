@@ -84,6 +84,13 @@ function addOldFollows(){
 }
 addOldFollows();
 
+function addReachArray(){
+  for(var key in data){
+    data[key].reach = [];
+  }
+}
+addReachArray();
+
 function listEveryone(){
   addFollowers();
   for(var key in data){
@@ -202,25 +209,27 @@ function noFollowBack(){
           noFollowBackers.push(data[key].name);
     }
   }
-  console.log('The people who follow someone that doesn\'t follow them back are: ' + noFollowBackers.join(', '));
+  console.log('The people who follow someone that doesn\'t follow them back are: ' + noFollowBackers.join(', ') + '\n');
 }
-
 noFollowBack();
 
+function totalReach(){
+  for(var key in data){
+    for (var k = 0; k < data[key].followers; k++){
+      data[key].reach.push(data[key].followers[k]);
+    }
+    for(var i = 0; i < data[key].followers.length; i++){
+      for(var j = 0; j < data[data[key].followers[i]].followers.length; j++){
+        if(data[key].reach.indexOf(data[data[key].followers[i]].followers[j]) < 0 && data[data[key].followers[i]].followers[j] !== data[key].id)
+        data[key].reach.push(data[data[key].followers[i]].followers[j]);
+      }
+    }
+    console.log(data[key].name + ' has a reach of ' + data[key].reach.length + ' people.\n');
+  }
+}
+totalReach();
 
 
-
-
-
-
-
-
-
-
-
-
-
-console.log(data);
 
 
 
