@@ -193,6 +193,19 @@ function followedMostOlder(){
 }
 followedMostOlder();
 
+function noFollowBack(){
+  var noFollowBackers = [];
+  for(var key in data){
+    for (var i = 0; i < data[key].follows.length; i++){
+      if(data[data[key].follows[i]].follows.indexOf(data[key].id) < 0)
+        if(noFollowBackers.indexOf(data[key].name) < 0)
+          noFollowBackers.push(data[key].name);
+    }
+  }
+  console.log('The people who follow someone that doesn\'t follow them back are: ' + noFollowBackers.join(', '));
+}
+
+noFollowBack();
 
 
 
@@ -207,9 +220,7 @@ followedMostOlder();
 
 
 
-
-
-//console.log(data);
+console.log(data);
 
 
 
